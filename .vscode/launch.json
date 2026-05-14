@@ -1,0 +1,122 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug Eureka",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/eureka",
+      "mainClass": "cl.triskeledu.eureka.TiendaEurekaApplication",
+      "projectName": "cl-triskeledu-eureka",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-usuarios",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-usuarios",
+      "mainClass": "cl.triskeledu.usuarios.TiendaUsuariosApplication",
+      "projectName": "cl-triskeledu-usuarios",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-productos",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-productos",
+      "mainClass": "cl.triskeledu.productos.TiendaProductosApplication",
+      "projectName": "cl-triskeledu-productos",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-inventario",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-inventario",
+      "mainClass": "cl.triskeledu.inventario.TiendaInventarioApplication",
+      "projectName": "cl-triskeledu-inventario",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-tiendas",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-tiendas",
+      "mainClass": "cl.triskeledu.tiendas.TiendaTiendasApplication",
+      "projectName": "cl-triskeledu-tiendas",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-carrito",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-carrito",
+      "mainClass": "cl.triskeledu.carrito.TiendaCarritoApplication",
+      "projectName": "cl-triskeledu-carrito",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-pedidos",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-pedidos",
+      "mainClass": "cl.triskeledu.pedidos.TiendaPedidosApplication",
+      "projectName": "cl-triskeledu-pedidos",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-logistica",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-logistica",
+      "mainClass": "cl.triskeledu.logistica.TiendaLogisticaApplication",
+      "projectName": "cl-triskeledu-logistica",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-promociones",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-promociones",
+      "mainClass": "cl.triskeledu.promociones.TiendaPromocionesApplication",
+      "projectName": "cl-triskeledu-promociones",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-facturacion",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-facturacion",
+      "mainClass": "cl.triskeledu.facturacion.TiendaFacturacionApplication",
+      "projectName": "cl-triskeledu-facturacion",
+      "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Debug ms-soporte",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/ms-soporte",
+      "mainClass": "cl.triskeledu.soporte.TiendaSoporteApplication",
+      "projectName": "cl-triskeledu-soporte",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug All Services",
+      "configurations": [
+        "Debug Eureka",
+        "Debug ms-usuarios",
+        "Debug ms-productos",
+        "Debug ms-inventario",
+        "Debug ms-tiendas",
+        "Debug ms-carrito",
+        "Debug ms-pedidos",
+        "Debug ms-logistica",
+        "Debug ms-promociones",
+        "Debug ms-facturacion",
+        "Debug ms-soporte"
+      ]
+    }
+  ]
+}

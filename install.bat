@@ -1,0 +1,30 @@
+@echo off
+echo.
+echo === REINSTALACION DE DEPENDENCIAS MAVEN ===
+echo.
+
+REM Paso 1: Eliminar carpeta local de dependencias
+echo Eliminando carpeta .m2 ...
+rmdir /s /q %USERPROFILE%\.m2
+
+REM Paso 2: Eliminar carpetas target de los proyectos
+echo Eliminando carpetas target ...
+rmdir /s /q C:\tienda-test\eureka\target
+rmdir /s /q C:\tienda-test\ms-usuarios\target
+rmdir /s /q C:\tienda-test\ms-productos\target
+rmdir /s /q C:\tienda-test\ms-inventario\target
+rmdir /s /q C:\tienda-test\ms-tiendas\target
+rmdir /s /q C:\tienda-test\ms-carrito\target
+rmdir /s /q C:\tienda-test\ms-pedidos\target
+rmdir /s /q C:\tienda-test\ms-logistica\target
+rmdir /s /q C:\tienda-test\ms-promociones\target
+rmdir /s /q C:\tienda-test\ms-facturacion\target
+rmdir /s /q C:\tienda-test\ms-soporte\target
+
+REM Paso 3: Instalar todas las dependencias forzadamente
+echo Descargando dependencias nuevamente con Maven ...
+mvn clean install -U -DskipTests
+
+echo.
+echo === PROCESO COMPLETADO ===
+pause

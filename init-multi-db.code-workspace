@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"name": "init-multi-db",
+			"path": "../Users/Home/Desktop/DUOC/TERC SEMESTRE/FULLSTACK/22 plantilla-creador-micro-servicios-v04/init-multi-db"
+		},
+		{
+			"name": "tienda-test",
+			"path": "."
+		},
+		{
+			"name": "Desktop",
+			"path": "../Users/Home/Desktop"
+		}
+	],
+	"settings": {
+		"terminal.integrated.defaultProfile.windows": "Command Prompt"
+	}
+}
