@@ -28,3 +28,20 @@ eureka:
     instance-id: "${spring.application.name}:${random.value}"
     lease-renewal-interval-in-seconds: 15
     lease-expiration-duration-in-seconds: 60
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+
+# Configuracion JWT
+jwt:
+  # Clave secreta para firmar los tokens (minimo 32 caracteres para HS256)
+  secret: mi-clave-secreta-super-segura-de-256-bits-para-jwt-tienda
+  # Tiempo de expiracion del token en milisegundos (86400000 = 24 horas)
+  expiration: 86400000

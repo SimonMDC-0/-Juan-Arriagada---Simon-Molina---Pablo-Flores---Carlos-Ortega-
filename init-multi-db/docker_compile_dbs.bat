@@ -7,5 +7,5 @@ docker exec -i postgres-db psql -U postgres -d postgres < 06-create_carrito.sql
 docker exec -i postgres-db psql -U postgres -d postgres < 07-create_pedidos.sql
 docker exec -i postgres-db psql -U postgres -d postgres < 08-create_logistica.sql
 docker exec -i postgres-db psql -U postgres -d postgres < 09-create_promociones.sql
-docker exec -i postgres-db psql -U postgres -d postgres < 10-create_facturacion.sql
+docker exec -i postgres-db psql -U postgres -d postgres < 010-create_facturacion.sql
 docker exec -i postgres-db psql -U postgres -d postgres < 11-create_soporte.sql
