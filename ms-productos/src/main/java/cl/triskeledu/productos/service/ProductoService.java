@@ -19,4 +19,5 @@ public interface ProductoService {
     List<ProductoResponseDTO> listarProductosPorCategoria(Integer categoriaId);
 
     ImagenResponseDTO agregarImagen(ImagenRequestDTO request);
+    void eliminarProducto(String sku);
 }

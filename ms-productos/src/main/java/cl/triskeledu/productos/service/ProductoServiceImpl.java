@@ -128,6 +128,22 @@ public class ProductoServiceImpl implements ProductoService {
         return new ImagenResponseDTO(saved.getId(), saved.getProductoSku(), saved.getUrlImagen(), saved.getEsPrincipal());
     }
 
+    @Override
+    @Transactional
+    public void eliminarProducto(String sku) {
+        log.info("Ejecutando lógica de servicio");
+        if (!productoRepository.existsById(sku)) {
+            throw new ResourceNotFoundException("Producto con SKU " + sku + " no encontrado.");
+        }
+        
+        List<Imagen> imagenes = imagenRepository.findByProductoSku(sku);
+        if (!imagenes.isEmpty()) {
+            imagenRepository.deleteAll(imagenes);
+        }
+        
+        productoRepository.deleteById(sku);
+    }
+
     private ProductoResponseDTO mapToProductoResponse(Producto producto) {
         List<String> imagenes = imagenRepository.findByProductoSku(producto.getSku()).stream()
                 .map(Imagen::getUrlImagen)

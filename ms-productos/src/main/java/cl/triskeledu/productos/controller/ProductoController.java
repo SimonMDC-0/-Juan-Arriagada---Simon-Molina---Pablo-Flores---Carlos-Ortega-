@@ -68,4 +68,10 @@ public class ProductoController {
         ImagenRequestDTO dto = new ImagenRequestDTO(sku, request.urlImagen(), request.esPrincipal());
         return new ResponseEntity<>(productoService.agregarImagen(dto), HttpStatus.CREATED);
     }
+
+    @DeleteMapping("/{sku}")
+    public ResponseEntity<Void> eliminarProducto(@PathVariable String sku) {
+        productoService.eliminarProducto(sku);
+        return ResponseEntity.noContent().build();
+    }
 }
