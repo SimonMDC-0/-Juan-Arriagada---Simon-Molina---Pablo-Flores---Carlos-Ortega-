@@ -1,5 +1,7 @@
 package cl.triskeledu.usuarios.controller;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.usuarios.dto.LoginRequestDTO;
 import cl.triskeledu.usuarios.dto.LoginResponseDTO;
 import cl.triskeledu.usuarios.security.JwtUtil;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
  * Controlador de autenticacion.
  * POST /api/auth/login  →  retorna JWT token si las credenciales son correctas.
  */
+@Slf4j
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -29,7 +32,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO request) {
+    public ResponseEntity<?> login(@Valid @Valid @RequestBody LoginRequestDTO request) {
+        log.info("Ejecutando método en el controlador");
         try {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

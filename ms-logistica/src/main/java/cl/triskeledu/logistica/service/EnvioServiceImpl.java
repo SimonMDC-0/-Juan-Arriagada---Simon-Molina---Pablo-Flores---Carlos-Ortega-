@@ -1,5 +1,7 @@
 package cl.triskeledu.logistica.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.logistica.dto.EnvioRequestDTO;
 import cl.triskeledu.logistica.dto.EnvioResponseDTO;
 import cl.triskeledu.logistica.exceptions.BadRequestException;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class EnvioServiceImpl implements EnvioService {
 
@@ -25,6 +28,7 @@ public class EnvioServiceImpl implements EnvioService {
     @Override
     @Transactional
     public EnvioResponseDTO programarEnvio(EnvioRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (envioRepository.findByPedidoId(request.pedidoId()).isPresent()) {
             throw new BadRequestException("Ya existe un envío programado para el pedido " + request.pedidoId());
         }
@@ -45,6 +49,7 @@ public class EnvioServiceImpl implements EnvioService {
     @Override
     @Transactional(readOnly = true)
     public EnvioResponseDTO obtenerEnvioPorPedido(Integer pedidoId) {
+        log.info("Ejecutando lógica de servicio");
         Envio envio = envioRepository.findByPedidoId(pedidoId)
                 .orElseThrow(() -> new ResourceNotFoundException("Envío para el pedido " + pedidoId + " no encontrado"));
         return mapToResponse(envio);
@@ -53,6 +58,7 @@ public class EnvioServiceImpl implements EnvioService {
     @Override
     @Transactional(readOnly = true)
     public List<EnvioResponseDTO> listarEnvios() {
+        log.info("Ejecutando lógica de servicio");
         return envioRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -61,6 +67,7 @@ public class EnvioServiceImpl implements EnvioService {
     @Override
     @Transactional
     public EnvioResponseDTO despacharEnvio(Integer id) {
+        log.info("Ejecutando lógica de servicio");
         Envio envio = envioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Envío " + id + " no encontrado"));
 
@@ -76,6 +83,7 @@ public class EnvioServiceImpl implements EnvioService {
     @Override
     @Transactional
     public EnvioResponseDTO entregarEnvio(Integer id) {
+        log.info("Ejecutando lógica de servicio");
         Envio envio = envioRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Envío " + id + " no encontrado"));
 

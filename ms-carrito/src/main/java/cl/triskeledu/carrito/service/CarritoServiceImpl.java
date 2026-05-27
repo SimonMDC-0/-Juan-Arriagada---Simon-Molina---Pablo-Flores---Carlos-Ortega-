@@ -1,5 +1,7 @@
 package cl.triskeledu.carrito.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.carrito.dto.CarritoItemRequestDTO;
 import cl.triskeledu.carrito.dto.CarritoItemResponseDTO;
 import cl.triskeledu.carrito.dto.CarritoRequestDTO;
@@ -21,6 +23,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class CarritoServiceImpl implements CarritoService {
 
@@ -37,6 +40,7 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     @Transactional
     public CarritoResponseDTO crearCarrito(CarritoRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         Optional<Carrito> activo = carritoRepository.findByUsuarioIdAndEstado(request.usuarioId(), "ACTIVO");
         if (activo.isPresent()) {
             return mapToResponse(activo.get());
@@ -50,6 +54,7 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     @Transactional(readOnly = true)
     public CarritoResponseDTO obtenerCarritoActivo(Integer usuarioId) {
+        log.info("Ejecutando lógica de servicio");
         Carrito carrito = carritoRepository.findByUsuarioIdAndEstado(usuarioId, "ACTIVO")
                 .orElseThrow(() -> new ResourceNotFoundException("No hay carrito activo para el usuario " + usuarioId));
         return mapToResponse(carrito);
@@ -58,6 +63,7 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     @Transactional
     public CarritoResponseDTO agregarItem(CarritoItemRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         Carrito carrito = carritoRepository.findById(request.carritoId())
                 .orElseThrow(() -> new ResourceNotFoundException("Carrito " + request.carritoId() + " no encontrado"));
 
@@ -95,6 +101,7 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     @Transactional
     public CarritoResponseDTO removerItem(Integer itemId) {
+        log.info("Ejecutando lógica de servicio");
         CarritoItem item = carritoItemRepository.findById(itemId)
                 .orElseThrow(() -> new ResourceNotFoundException("Item " + itemId + " no encontrado"));
 
@@ -108,6 +115,7 @@ public class CarritoServiceImpl implements CarritoService {
     @Override
     @Transactional
     public CarritoResponseDTO vaciarCarrito(Integer carritoId) {
+        log.info("Ejecutando lógica de servicio");
         Carrito carrito = carritoRepository.findById(carritoId)
                 .orElseThrow(() -> new ResourceNotFoundException("Carrito " + carritoId + " no encontrado"));
 

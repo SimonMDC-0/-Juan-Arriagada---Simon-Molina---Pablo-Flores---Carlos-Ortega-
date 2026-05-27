@@ -1,5 +1,7 @@
 package cl.triskeledu.pedidos.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.pedidos.dto.PedidoDetalleResponseDTO;
 import cl.triskeledu.pedidos.dto.PedidoRequestDTO;
 import cl.triskeledu.pedidos.dto.PedidoResponseDTO;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class PedidoServiceImpl implements PedidoService {
 
@@ -36,6 +39,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     @Transactional
     public PedidoResponseDTO crearPedido(PedidoRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         CarritoResponseDTO carrito = carritoClient.obtenerCarritoActivo(request.usuarioId());
         
         if (carrito.items() == null || carrito.items().isEmpty()) {
@@ -74,6 +78,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     @Transactional(readOnly = true)
     public PedidoResponseDTO obtenerPedidoPorId(Integer id) {
+        log.info("Ejecutando lógica de servicio");
         Pedido pedido = pedidoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido " + id + " no encontrado"));
         return mapToResponse(pedido);
@@ -82,6 +87,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     @Transactional(readOnly = true)
     public List<PedidoResponseDTO> listarPedidosPorUsuario(Integer usuarioId) {
+        log.info("Ejecutando lógica de servicio");
         return pedidoRepository.findByUsuarioId(usuarioId).stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -90,6 +96,7 @@ public class PedidoServiceImpl implements PedidoService {
     @Override
     @Transactional
     public PedidoResponseDTO actualizarEstadoPedido(Integer id, String nuevoEstado) {
+        log.info("Ejecutando lógica de servicio");
         Pedido pedido = pedidoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Pedido " + id + " no encontrado"));
 

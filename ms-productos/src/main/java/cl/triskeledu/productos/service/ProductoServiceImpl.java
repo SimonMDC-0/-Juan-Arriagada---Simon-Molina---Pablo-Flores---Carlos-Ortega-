@@ -1,5 +1,7 @@
 package cl.triskeledu.productos.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.productos.dto.CategoriaRequestDTO;
 import cl.triskeledu.productos.dto.CategoriaResponseDTO;
 import cl.triskeledu.productos.dto.ImagenRequestDTO;
@@ -20,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class ProductoServiceImpl implements ProductoService {
 
@@ -39,6 +42,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional
     public CategoriaResponseDTO crearCategoria(CategoriaRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (categoriaRepository.findByNombreCategoria(request.nombreCategoria()).isPresent()) {
             throw new BadRequestException("La categoría " + request.nombreCategoria() + " ya existe.");
         }
@@ -50,6 +54,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional(readOnly = true)
     public List<CategoriaResponseDTO> listarCategorias() {
+        log.info("Ejecutando lógica de servicio");
         return categoriaRepository.findAll().stream()
                 .map(c -> new CategoriaResponseDTO(c.getId(), c.getNombreCategoria(), c.getDescripcion()))
                 .collect(Collectors.toList());
@@ -58,6 +63,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional
     public ProductoResponseDTO crearProducto(ProductoRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (productoRepository.existsById(request.sku())) {
             throw new BadRequestException("El producto con SKU " + request.sku() + " ya existe.");
         }
@@ -78,6 +84,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional(readOnly = true)
     public ProductoResponseDTO obtenerProductoPorSku(String sku) {
+        log.info("Ejecutando lógica de servicio");
         Producto producto = productoRepository.findById(sku)
                 .orElseThrow(() -> new ResourceNotFoundException("Producto con SKU " + sku + " no encontrado."));
         return mapToProductoResponse(producto);
@@ -86,6 +93,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductoResponseDTO> listarProductos() {
+        log.info("Ejecutando lógica de servicio");
         return productoRepository.findAll().stream()
                 .map(this::mapToProductoResponse)
                 .collect(Collectors.toList());
@@ -94,6 +102,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional(readOnly = true)
     public List<ProductoResponseDTO> listarProductosPorCategoria(Integer categoriaId) {
+        log.info("Ejecutando lógica de servicio");
         if (!categoriaRepository.existsById(categoriaId)) {
             throw new ResourceNotFoundException("Categoría " + categoriaId + " no encontrada.");
         }
@@ -105,6 +114,7 @@ public class ProductoServiceImpl implements ProductoService {
     @Override
     @Transactional
     public ImagenResponseDTO agregarImagen(ImagenRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (!productoRepository.existsById(request.productoSku())) {
             throw new ResourceNotFoundException("Producto con SKU " + request.productoSku() + " no encontrado.");
         }

@@ -1,5 +1,7 @@
 package cl.triskeledu.soporte.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.soporte.dto.TicketRequestDTO;
 import cl.triskeledu.soporte.dto.TicketResponseDTO;
 import cl.triskeledu.soporte.exceptions.BadRequestException;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class TicketServiceImpl implements TicketService {
 
@@ -25,6 +28,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @Transactional
     public TicketResponseDTO crearTicket(TicketRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         Ticket ticket = new Ticket(
                 null,
                 request.usuarioId(),
@@ -43,6 +47,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @Transactional(readOnly = true)
     public TicketResponseDTO obtenerTicketPorId(Integer id) {
+        log.info("Ejecutando lógica de servicio");
         Ticket ticket = ticketRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " no encontrado"));
         return mapToResponse(ticket);
@@ -51,6 +56,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @Transactional(readOnly = true)
     public List<TicketResponseDTO> listarTicketsPorUsuario(Integer usuarioId) {
+        log.info("Ejecutando lógica de servicio");
         return ticketRepository.findByUsuarioId(usuarioId).stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -59,6 +65,7 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @Transactional
     public TicketResponseDTO actualizarEstadoTicket(Integer id, String nuevoEstado) {
+        log.info("Ejecutando lógica de servicio");
         Ticket ticket = ticketRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket " + id + " no encontrado"));
 

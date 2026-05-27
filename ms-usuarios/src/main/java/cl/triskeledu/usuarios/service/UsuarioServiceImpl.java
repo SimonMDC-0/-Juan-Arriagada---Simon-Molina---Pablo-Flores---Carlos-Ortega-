@@ -1,5 +1,7 @@
 package cl.triskeledu.usuarios.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.usuarios.dto.DireccionRequestDTO;
 import cl.triskeledu.usuarios.dto.DireccionResponseDTO;
 import cl.triskeledu.usuarios.dto.UsuarioRequestDTO;
@@ -19,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -39,6 +42,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public UsuarioResponseDTO registrarUsuario(UsuarioRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (usuarioRepository.existsById(request.email())) {
             throw new BadRequestException("El usuario con email " + request.email() + " ya existe.");
         }
@@ -64,6 +68,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional(readOnly = true)
     public UsuarioResponseDTO obtenerUsuarioPorEmail(String email) {
+        log.info("Ejecutando lógica de servicio");
         Usuario usuario = usuarioRepository.findById(email)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario con email " + email + " no encontrado."));
         return mapToUsuarioResponse(usuario);
@@ -72,6 +77,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional(readOnly = true)
     public List<UsuarioResponseDTO> listarUsuarios() {
+        log.info("Ejecutando lógica de servicio");
         return usuarioRepository.findAll().stream()
                 .map(this::mapToUsuarioResponse)
                 .collect(Collectors.toList());
@@ -80,6 +86,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional
     public DireccionResponseDTO agregarDireccion(DireccionRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (!usuarioRepository.existsById(request.usuarioEmail())) {
             throw new ResourceNotFoundException("Usuario con email " + request.usuarioEmail() + " no encontrado.");
         }
@@ -99,6 +106,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     @Transactional(readOnly = true)
     public List<DireccionResponseDTO> listarDireccionesPorUsuario(String email) {
+        log.info("Ejecutando lógica de servicio");
         if (!usuarioRepository.existsById(email)) {
             throw new ResourceNotFoundException("Usuario con email " + email + " no encontrado.");
         }

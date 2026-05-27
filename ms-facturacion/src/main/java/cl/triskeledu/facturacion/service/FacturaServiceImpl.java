@@ -1,5 +1,7 @@
 package cl.triskeledu.facturacion.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.facturacion.dto.FacturaRequestDTO;
 import cl.triskeledu.facturacion.dto.FacturaResponseDTO;
 import cl.triskeledu.facturacion.exceptions.BadRequestException;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class FacturaServiceImpl implements FacturaService {
 
@@ -29,6 +32,7 @@ public class FacturaServiceImpl implements FacturaService {
     @Override
     @Transactional
     public FacturaResponseDTO emitirFactura(FacturaRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (facturaRepository.findByPedidoId(request.pedidoId()).isPresent()) {
             throw new BadRequestException("Ya existe una factura emitida para el pedido " + request.pedidoId());
         }
@@ -62,6 +66,7 @@ public class FacturaServiceImpl implements FacturaService {
     @Override
     @Transactional(readOnly = true)
     public FacturaResponseDTO obtenerFacturaPorPedido(Integer pedidoId) {
+        log.info("Ejecutando lógica de servicio");
         Factura factura = facturaRepository.findByPedidoId(pedidoId)
                 .orElseThrow(() -> new ResourceNotFoundException("Factura para el pedido " + pedidoId + " no encontrada"));
         return mapToResponse(factura);
@@ -70,6 +75,7 @@ public class FacturaServiceImpl implements FacturaService {
     @Override
     @Transactional(readOnly = true)
     public List<FacturaResponseDTO> listarFacturas() {
+        log.info("Ejecutando lógica de servicio");
         return facturaRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());

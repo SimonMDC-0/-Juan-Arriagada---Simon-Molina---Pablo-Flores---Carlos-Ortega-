@@ -1,5 +1,7 @@
 package cl.triskeledu.promociones.service;
 
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import cl.triskeledu.promociones.dto.PromocionRequestDTO;
 import cl.triskeledu.promociones.dto.PromocionResponseDTO;
 import cl.triskeledu.promociones.exceptions.BadRequestException;
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class PromocionServiceImpl implements PromocionService {
 
@@ -25,6 +28,7 @@ public class PromocionServiceImpl implements PromocionService {
     @Override
     @Transactional
     public PromocionResponseDTO crearPromocion(PromocionRequestDTO request) {
+        log.info("Ejecutando lógica de servicio");
         if (promocionRepository.findByCodigo(request.codigo()).isPresent()) {
             throw new BadRequestException("Ya existe una promoción con el código " + request.codigo());
         }
@@ -46,6 +50,7 @@ public class PromocionServiceImpl implements PromocionService {
     @Override
     @Transactional(readOnly = true)
     public PromocionResponseDTO obtenerPromocionPorCodigo(String codigo) {
+        log.info("Ejecutando lógica de servicio");
         Promocion promocion = promocionRepository.findByCodigo(codigo)
                 .orElseThrow(() -> new ResourceNotFoundException("Promoción " + codigo + " no encontrada"));
         return mapToResponse(promocion);
@@ -54,6 +59,7 @@ public class PromocionServiceImpl implements PromocionService {
     @Override
     @Transactional(readOnly = true)
     public List<PromocionResponseDTO> listarPromociones() {
+        log.info("Ejecutando lógica de servicio");
         return promocionRepository.findAll().stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
@@ -62,6 +68,7 @@ public class PromocionServiceImpl implements PromocionService {
     @Override
     @Transactional(readOnly = true)
     public PromocionResponseDTO aplicarPromocion(String codigo) {
+        log.info("Ejecutando lógica de servicio");
         Promocion promocion = promocionRepository.findByCodigo(codigo)
                 .orElseThrow(() -> new ResourceNotFoundException("Promoción " + codigo + " no encontrada"));
 
