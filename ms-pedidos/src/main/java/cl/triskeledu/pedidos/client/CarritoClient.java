@@ -4,14 +4,14 @@ import cl.triskeledu.pedidos.dto.CarritoResponseDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @FeignClient(name = "ms-carrito")
 public interface CarritoClient {
 
-    @GetMapping("/api/carrito/activo/{usuarioId}")
+    @GetMapping("/api/carrito/usuario/{usuarioId}")
     CarritoResponseDTO obtenerCarritoActivo(@PathVariable("usuarioId") Integer usuarioId);
 
-    @PatchMapping("/api/carrito/{carritoId}/vaciar")
+    @DeleteMapping("/api/carrito/{carritoId}/vaciar")
     CarritoResponseDTO vaciarCarrito(@PathVariable("carritoId") Integer carritoId);
 }

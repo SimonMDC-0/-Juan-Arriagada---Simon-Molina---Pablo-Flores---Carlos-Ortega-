@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "ms-productos")
 public interface ProductoClient {
 
-    @GetMapping("/api/productos/sku/{sku}")
+    @GetMapping("/api/productos/{sku}")
     ProductoDTO obtenerProductoPorSku(@PathVariable("sku") String sku);
 }

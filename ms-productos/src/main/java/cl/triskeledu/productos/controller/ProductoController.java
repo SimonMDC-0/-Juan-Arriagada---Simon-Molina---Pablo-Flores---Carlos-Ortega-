@@ -70,8 +70,10 @@ public class ProductoController {
     }
 
     @DeleteMapping("/{sku}")
-    public ResponseEntity<Void> eliminarProducto(@PathVariable String sku) {
+    public ResponseEntity<java.util.Map<String, String>> eliminarProducto(@PathVariable String sku) {
         productoService.eliminarProducto(sku);
-        return ResponseEntity.noContent().build();
+        java.util.Map<String, String> respuesta = new java.util.HashMap<>();
+        respuesta.put("mensaje", "El producto con SKU '" + sku + "' fue eliminado exitosamente.");
+        return ResponseEntity.ok(respuesta);
     }
 }
